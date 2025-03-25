@@ -19,43 +19,42 @@ import com.example.desafio_spring_boot.config.security.filters.JwtAuthentication
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-        private final JwtAuthenticationFilter jwtAuthenticationFilter;
-        private final AuthenticationProvider authenticationProvider;
-        private final CustomAccessDeniedHandler customAccessDeniedHandler;
-        private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthenticationProvider authenticationProvider;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
-        public WebSecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
-                        AuthenticationProvider authenticationProvider,
-                        CustomAccessDeniedHandler customAccessDeniedHandler,
-                        CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
-                this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-                this.authenticationProvider = authenticationProvider;
-                this.customAccessDeniedHandler = customAccessDeniedHandler;
-                this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
-        }
+    public WebSecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
+                             AuthenticationProvider authenticationProvider,
+                             CustomAccessDeniedHandler customAccessDeniedHandler,
+                             CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.authenticationProvider = authenticationProvider;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
+        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
+    }
 
-        @Bean
-        SecurityFilterChain getSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-                httpSecurity
-                                .csrf(AbstractHttpConfigurer::disable)
-                                .authorizeHttpRequests(rmr -> rmr
-                                                .requestMatchers("/exercise/api**", "/error").permitAll()
-                                                .requestMatchers("/h2-console/**").permitAll()
-                                                .requestMatchers("/swagger-ui.html", "/swagger-ui/**",
-                                                                "/v3/api-docs/**")
-                                                .permitAll()
-                                                .requestMatchers("/api/auth/get-token").permitAll()
-                                                .anyRequest().authenticated())
-                                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                                .sessionManagement(
-                                                sessionManagement -> sessionManagement
-                                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                                .authenticationProvider(authenticationProvider)
-                                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                                .exceptionHandling(exception -> exception.accessDeniedHandler(customAccessDeniedHandler)
-                                                .authenticationEntryPoint(customAuthenticationEntryPoint));
+    @Bean
+    SecurityFilterChain getSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(rmr -> rmr
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/swagger-ui/index.html", "/swagger-ui/**",
+                                "/v3/api-docs/**")
+                        .permitAll()
+                        .requestMatchers("/api/auth/get-token").permitAll()
+                        .anyRequest().authenticated())
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .sessionManagement(
+                        sessionManagement -> sessionManagement
+                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exception -> exception.accessDeniedHandler(customAccessDeniedHandler)
+                        .authenticationEntryPoint(customAuthenticationEntryPoint));
 
-                return httpSecurity.build();
+        return httpSecurity.build();
 
-        }
+    }
 }

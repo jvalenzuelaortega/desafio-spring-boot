@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.desafio_spring_boot.entity.TaskStatus;
 
+import java.util.Optional;
+
 @Repository
 public interface TaskStatusRepository extends JpaRepository<TaskStatus, Long> {
 
+    Optional<TaskStatus> findTaskStatusByName(String name);
 }

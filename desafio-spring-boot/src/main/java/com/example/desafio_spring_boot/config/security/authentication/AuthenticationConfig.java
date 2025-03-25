@@ -1,5 +1,6 @@
 package com.example.desafio_spring_boot.config.security.authentication;
 
+import com.example.desafio_spring_boot.exceptions.UserOperationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -26,7 +27,7 @@ public class AuthenticationConfig {
                 .map(userEntity -> User.withUsername(userEntity.getUserName())
                         .password(userEntity.getPassword())
                         .build())
-                .orElseThrow(() -> new RuntimeException("User not found for authentication"));
+                .orElseThrow(() -> new UserOperationException("Usuario no encontrado para autenticar"));
     }
 
     @Bean

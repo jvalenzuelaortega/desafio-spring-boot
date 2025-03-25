@@ -23,7 +23,7 @@ public class AuthController {
     @PostMapping("/get-token")
     public ResponseEntity<ApiResponseDto<?>> generateToken(@RequestParam String username, @RequestParam String password) {
         ApiResponseDto<?> responseDto = authService.authenticateAndGenerateToken(username, password);
-        
+
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 

@@ -10,5 +10,5 @@ public class ApiResponseDto<T> {
     private String message;
     private int statusCode;
     private T data;
-    
+
 }

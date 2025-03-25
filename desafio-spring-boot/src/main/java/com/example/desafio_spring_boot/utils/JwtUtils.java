@@ -4,6 +4,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +18,11 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtils {
 
-    private String secretKey = "3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b";
-    private int expiration = 3600000;
+    @Value("${jwt.secret.key}")
+    private String secretKey;
 
+    @Value("${jwt.secret.duration}")
+    private int expiration;
 
     public String getToken(User user) {
         return Jwts.builder()
@@ -64,5 +67,5 @@ public class JwtUtils {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-    
+
 }

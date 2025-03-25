@@ -28,20 +28,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ApiResponseDto<?> authenticateAndGenerateToken(String username, String password) {
-        Optional<User> user = userRepository.findByUserName(username);
+        User user = userRepository.findByUserName(username)
+                .orElseThrow(() -> new AuthOperationException("Usuario no encontrado en base de datos"));
 
-        if (user.isPresent()) {
-            String encodePassword = passwordEncoder.encode(user.get().getPassword());
-            if (passwordEncoder.matches(password, encodePassword)) {
-
-                String token = jwtUtils.getToken(user.get());
-
-                return ApiResponseDto.builder()
-                        .message("Operacion exitosa")
-                        .statusCode(200)
-                        .data(TokenResponseDto.builder().token(token).build())
-                        .build();
-            }
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            String token = jwtUtils.getToken(user);
+            return ApiResponseDto.builder()
+                    .message("Operacion exitosa")
+                    .statusCode(200)
+                    .data(TokenResponseDto.builder().token(token).build())
+                    .build();
         }
 
         throw new AuthOperationException("Error al generar token");

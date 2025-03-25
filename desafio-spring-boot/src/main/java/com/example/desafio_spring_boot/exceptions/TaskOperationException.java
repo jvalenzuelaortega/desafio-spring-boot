@@ -6,7 +6,4 @@ public class TaskOperationException extends RuntimeException {
         super(message);
     }
 
-    public TaskOperationException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }
