@@ -1,6 +1,7 @@
 # Desafio Spring Boot
 
 Este proyecto es una aplicación de Spring Boot que proporciona una API REST para gestionar tareas y usuarios. Utiliza Spring Security para la autenticación y autorización, y Swagger para la documentación de la API.
+Este proyecto esta en base, a lo propuesto en el [Desafio Tecnico Spring Boot](CHALLENGE.md)
 
 ## Requisitos
 
@@ -15,7 +16,7 @@ La aplicación utiliza una base de datos en memoria H2 para el almacenamiento de
 
 ### Swagger
 
-Swagger está integrado para proporcionar documentación de la API. Puedes acceder a la interfaz de Swagger en `http://localhost:8080/swagger-ui.html`.
+~~Swagger está integrado para proporcionar documentación de la API. Puedes acceder a la interfaz de Swagger en `http://localhost:8080/swagger-ui.html`.~~
 
 ### Seguridad
 
