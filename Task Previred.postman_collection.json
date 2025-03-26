@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "a902ad9f-1510-40c0-9be0-884b24198a4c",
+		"name": "Task Previred",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "324269"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Generar token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/auth/get-token?username=admin&password=password123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"get-token"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin"
+								},
+								{
+									"key": "password",
+									"value": "password123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Mjk1OTQ0NCwiZXhwIjoxNzQyOTYyNDQ0fQ.IaQkscpO72JOqkYzoBQ-e2hZSfa2lR_jTHxXgNU_U_efq0F_vKS0BT7LHIiHc9Nm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"username\" : \"jvalenzo\",\r\n   \"password\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/create-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqdmFsZW56byIsImlhdCI6MTc0MjkyMjI1NSwiZXhwIjoxNzQyOTI1ODU1fQ.FKSc0_EbsewgE4sqdwsqYx8khA8aw8Pa-gNJHCTyNkD2Cea4-dkpmfk1OkXH11Yk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/get-all-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"get-all-users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tareas",
+			"item": [
+				{
+					"name": "Guardar tarea",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Mjk1OTQ0NCwiZXhwIjoxNzQyOTYyNDQ0fQ.IaQkscpO72JOqkYzoBQ-e2hZSfa2lR_jTHxXgNU_U_efq0F_vKS0BT7LHIiHc9Nm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"username\":\"admin\",\r\n   \"description\":\"Deployment flow\",\r\n   \"status_description\":\"Completed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/tasks/create-task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tasks",
+								"create-task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener tareas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Mjk1OTQ0NCwiZXhwIjoxNzQyOTYyNDQ0fQ.IaQkscpO72JOqkYzoBQ-e2hZSfa2lR_jTHxXgNU_U_efq0F_vKS0BT7LHIiHc9Nm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/tasks/get-all-tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tasks",
+								"get-all-tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar tareas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Mjk1OTczNiwiZXhwIjoxNzQyOTYyNzM2fQ.YE4TlwKKSdX0dlwTYaNpbXwirnVy_aC0ZiG-ArPfYlUsCgjmebS2c4pF8s7uHjI4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/tasks/delete-task/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tasks",
+								"delete-task",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar tareas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Mjk1OTczNiwiZXhwIjoxNzQyOTYyNzM2fQ.YE4TlwKKSdX0dlwTYaNpbXwirnVy_aC0ZiG-ArPfYlUsCgjmebS2c4pF8s7uHjI4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"username\":\"test-user-1\",\r\n   \"description\":\"Deployment flow\",\r\n   \"status_description\":\"Not Started\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/tasks/update-task/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tasks",
+								"update-task",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

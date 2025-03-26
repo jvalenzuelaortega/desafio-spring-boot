@@ -13,7 +13,7 @@ import com.example.desafio_spring_boot.model.response.ApiResponseDto;
 import com.example.desafio_spring_boot.service.UserService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping(value = "/api/user")
 public class UserController {
 
     private final UserService userService;
@@ -22,12 +22,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/get-all-users")
+    @GetMapping(value = "/get-all-users", produces="application/json")
     public ResponseEntity<ApiResponseDto<?>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+        ApiResponseDto<?> getAllUsers = userService.getAllUsers();
+        return ResponseEntity.status(HttpStatus.OK).body(getAllUsers);
     }
 
-    @PostMapping("/insert-user")
+    @PostMapping(value = "/create-user", produces="application/json")
     public ResponseEntity<ApiResponseDto<?>> createUser(@RequestBody UserRequestDto userRequestDto) {
         ApiResponseDto<?> createUser = userService.createUser(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createUser);

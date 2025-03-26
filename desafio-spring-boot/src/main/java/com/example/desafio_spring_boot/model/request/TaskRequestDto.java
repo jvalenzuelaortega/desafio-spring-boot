@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TaskRequestDto {
 
-    @JsonProperty("user_name")
+    @JsonProperty("username")
     private String username;
 
     @JsonProperty("description")

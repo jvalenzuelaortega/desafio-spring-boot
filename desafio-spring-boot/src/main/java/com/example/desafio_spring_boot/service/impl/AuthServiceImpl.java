@@ -1,8 +1,5 @@
 package com.example.desafio_spring_boot.service.impl;
 
-import java.util.Optional;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.desafio_spring_boot.entity.User;
@@ -17,12 +14,10 @@ import com.example.desafio_spring_boot.utils.JwtUtils;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
 
-    public AuthServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, JwtUtils jwtUtils) {
+    public AuthServiceImpl(UserRepository userRepository, JwtUtils jwtUtils) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
     }
 
@@ -31,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByUserName(username)
                 .orElseThrow(() -> new AuthOperationException("Usuario no encontrado en base de datos"));
 
-        if (passwordEncoder.matches(password, user.getPassword())) {
+        if (password.equals(user.getPassword())) {
             String token = jwtUtils.getToken(user);
             return ApiResponseDto.builder()
                     .message("Operacion exitosa")

@@ -11,7 +11,7 @@ import com.example.desafio_spring_boot.model.response.ApiResponseDto;
 import com.example.desafio_spring_boot.service.AuthService;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping(value = "/api/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -20,7 +20,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/get-token")
+    @PostMapping(value = "/get-token", produces="application/json")
     public ResponseEntity<ApiResponseDto<?>> generateToken(@RequestParam String username, @RequestParam String password) {
         ApiResponseDto<?> responseDto = authService.authenticateAndGenerateToken(username, password);
 

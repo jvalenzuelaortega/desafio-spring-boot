@@ -88,7 +88,7 @@ public class TaskServiceImpl implements TaskService {
 
         Task updatedTask = taskRepository.save(task);
 
-        return ApiResponseDto.builder().statusCode(201).message("Operacion exitosa: actualizar").data(taskMapper.mapperTaskEntitytoTaskResponseDto(updatedTask)).build();
+        return ApiResponseDto.builder().statusCode(200).message("Operacion exitosa: actualizar").data(taskMapper.mapperTaskEntitytoTaskResponseDto(updatedTask)).build();
     }
 
     @Override

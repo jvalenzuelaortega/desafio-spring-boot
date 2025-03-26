@@ -16,7 +16,7 @@ import com.example.desafio_spring_boot.model.response.ApiResponseDto;
 import com.example.desafio_spring_boot.service.TaskService;
 
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping(value = "/api/tasks")
 public class TaskController {
 
     private final TaskService taskService;
@@ -25,25 +25,25 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/get-all-tasks")
+    @GetMapping(value = "/get-all-tasks", produces="application/json")
     public ResponseEntity<ApiResponseDto<?>> getAllTask() {
         ApiResponseDto<?> getAllTask = taskService.getAllTask();
         return ResponseEntity.status(HttpStatus.OK).body(getAllTask);
     }
 
-    @PostMapping("/create-task")
+    @PostMapping(value = "/create-task", produces="application/json")
     public ResponseEntity<ApiResponseDto<?>> createTask(@RequestBody TaskRequestDto taskRequestDto) {
         ApiResponseDto<?> createTask = taskService.createTask(taskRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createTask);
     }
 
-    @PutMapping("/update-task/{id}")
+    @PutMapping(value = "/update-task/{id}", produces="application/json")
     public ResponseEntity<ApiResponseDto<?>> updateTask(@PathVariable Long id, @RequestBody TaskRequestDto taskRequestDto) {
         ApiResponseDto<?> updateTask = taskService.updateTask(id, taskRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(updateTask);
     }
 
-    @DeleteMapping("/delete-task/{id}")
+    @DeleteMapping(value = "/delete-task/{id}", produces="application/json")
     public ResponseEntity<ApiResponseDto<?>> deleteTask(@PathVariable Long id) {
         ApiResponseDto<?> deleteTask = taskService.deleteTask(id);
         return ResponseEntity.status(HttpStatus.OK).body(deleteTask);
